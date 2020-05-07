@@ -46,11 +46,9 @@ workflows:
     jobs:
       - prepare
       - test:
-          when: << pipeline.parameters.run_tests >>
           requires:
             - prepare
       - deploy_staging:
-          when: << pipeline.parameters.run_staging_deploy >>
           requires:
             - test
       - deploy_production:
