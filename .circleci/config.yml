@@ -49,7 +49,7 @@ workflows:
     jobs:
       - prepare
       - test:
-          unless: << pipeline.parameters.only_deploy_staging || pipeline.parameters.only_deploy_production >>
+          unless: << pipeline.parameters.only_deploy_staging >> || << pipeline.parameters.only_deploy_production >>
           requires:
             - prepare
       - deploy_staging:
