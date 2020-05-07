@@ -34,6 +34,14 @@ jobs:
           command: |
             echo "Deploy production"
 
+parameters:
+  only_deploy_staging:
+    type: boolean
+    default: false
+  only_deploy_production:
+    type: boolean
+    default: false
+
 workflows:
   version: 2
 
@@ -41,11 +49,14 @@ workflows:
     jobs:
       - prepare
       - test:
+	  unless: << pipeline.parameters.only_deploy_staging || pipeline.parameters.only_deploy_production >>
           requires:
             - prepare
       - deploy_staging:
+	  unless: << pipeline.parameters.only_deploy_production >>
           requires:
             - test
       - deploy_production:
+	  unless: << pipeline.parameters.only_deploy_staging >>
           requires:
             - deploy_staging
