@@ -5,25 +5,25 @@ jobs:
       - image: alpine:3.7
     steps:
       - run:
-        name: Prepare
-        command: |
-          echo "Prepare"
+          name: Prepare
+          command: |
+            echo "Prepare"
   test:
     docker:
       - image: alpine:3.7
     steps:
       - run:
-        name: Test
-        command: |
-          echo "Test"
+          name: Test
+          command: |
+            echo "Test"
   deploy:
     docker:
       - image: alpine:3.7
     steps:
       - run:
-        name: Deploy
-        command: |
-          echo "Deploy"
+          name: Deploy
+          command: |
+            echo "Deploy"
 
 workflows:
   version: 2
