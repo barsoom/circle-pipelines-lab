@@ -42,7 +42,7 @@ parameters:
 workflows:
   version: 2
 
-  all:
+  build:
     jobs:
       - prepare
       - test:
