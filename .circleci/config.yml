@@ -32,8 +32,8 @@ workflows:
     jobs:
       - prepare
       - test:
-        requires:
-          - prepare
+          requires:
+            - prepare
       - deploy:
           requires:
             - test
