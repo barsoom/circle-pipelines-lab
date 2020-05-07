@@ -35,5 +35,5 @@ workflows:
         requires:
           - prepare
       - deploy:
-        requires:
-          - test
+          requires:
+            - test
