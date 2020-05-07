@@ -1,5 +1,13 @@
 version: 2.1
 
+parameters:
+  run_tests:
+    type: boolean
+    default: true
+  run_staging_deploy:
+    type: boolean
+    default: true
+
 jobs:
   prepare:
     docker:
@@ -10,6 +18,7 @@ jobs:
           command: |
             echo "Prepare"
   test:
+    when: << pipeline.parameters.run_tests >>
     docker:
       - image: alpine:3.7
     steps:
@@ -17,7 +26,9 @@ jobs:
           name: Test
           command: |
             echo "Test"
+
   deploy_staging:
+    when: << pipeline.parameters.run_staging_deploy >>
     docker:
       - image: alpine:3.7
     steps:
@@ -25,6 +36,7 @@ jobs:
           name: Deploy staging
           command: |
             echo "Deploy staging"
+
   deploy_production:
     docker:
       - image: alpine:3.7
@@ -34,14 +46,6 @@ jobs:
           command: |
             echo "Deploy production"
 
-parameters:
-  run_tests:
-    type: boolean
-    default: true
-  run_staging_deploy:
-    type: boolean
-    default: true
-
 workflows:
   version: 2
 
@@ -49,11 +53,9 @@ workflows:
     jobs:
       - prepare
       - test:
-          when: << pipeline.parameters.run_tests >>
           requires:
             - prepare
       - deploy_staging:
-          when: << pipeline.parameters.run_staging_deploy >>
           requires:
             - test
       - deploy_production:
