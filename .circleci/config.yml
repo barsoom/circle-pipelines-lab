@@ -1,0 +1,39 @@
+version: 2.1
+jobs:
+  prepare:
+    docker:
+      - alpine:3.7
+    steps:
+      - run:
+        name: Prepare
+        command: |
+          echo "Prepare"
+  test:
+    docker:
+      - alpine:3.7
+    steps:
+      - run:
+        name: Test
+        command: |
+          echo "Test"
+  deploy:
+    docker:
+      - alpine:3.7
+    steps:
+      - run:
+        name: Deploy
+        command: |
+          echo "Deploy"
+
+workflows:
+  version: 2
+
+  all:
+    jobs:
+      - prepare
+      - test:
+        requires:
+          - prepare
+      - deploy:
+        requires:
+          - test
