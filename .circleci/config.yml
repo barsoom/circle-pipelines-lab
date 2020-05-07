@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   prepare:
     docker:
-      - alpine:3.7
+      - image: alpine:3.7
     steps:
       - run:
         name: Prepare
@@ -10,7 +10,7 @@ jobs:
           echo "Prepare"
   test:
     docker:
-      - alpine:3.7
+      - image: alpine:3.7
     steps:
       - run:
         name: Test
@@ -18,7 +18,7 @@ jobs:
           echo "Test"
   deploy:
     docker:
-      - alpine:3.7
+      - image: alpine:3.7
     steps:
       - run:
         name: Deploy
