@@ -1,4 +1,5 @@
 version: 2.1
+
 jobs:
   prepare:
     docker:
@@ -16,14 +17,22 @@ jobs:
           name: Test
           command: |
             echo "Test"
-  deploy:
+  deploy_staging:
     docker:
       - image: alpine:3.7
     steps:
       - run:
-          name: Deploy
+          name: Deploy staging
           command: |
-            echo "Deploy"
+            echo "Deploy staging"
+  deploy_production:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - run:
+          name: Deploy production
+          command: |
+            echo "Deploy production"
 
 workflows:
   version: 2
@@ -34,6 +43,9 @@ workflows:
       - test:
           requires:
             - prepare
-      - deploy:
+      - deploy_staging:
           requires:
             - test
+      - deploy_production:
+          requires:
+            - deploy_staging
