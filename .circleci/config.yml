@@ -56,7 +56,7 @@ workflows:
             - deploy_staging
 
   deploy_staging_and_production:
-    when: << pipeline.parameters.skip_tests_and_deploy_staging_and_production >>
+    #when: << pipeline.parameters.skip_tests_and_deploy_staging_and_production >>
     jobs:
       - prepare
       - deploy_staging:
