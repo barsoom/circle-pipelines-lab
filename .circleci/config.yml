@@ -1,7 +1,7 @@
 version: 2.1
 
 jobs:
-  prepare:
+  build:
     docker:
       - image: alpine:latest
     steps:
@@ -39,10 +39,10 @@ workflows:
 
   build:
     jobs:
-      - prepare
+      - build
       - test:
           requires:
-            - prepare
+            - build
       - deploy_staging:
           requires:
             - test
